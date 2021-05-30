@@ -1,0 +1,1 @@
+export { ComponentNavbar } from './component.navbar';
