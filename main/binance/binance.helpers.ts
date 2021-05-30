@@ -15,7 +15,6 @@ export const subscribeDepthRequestHelper = (symbol) => {
 
 export const unsubscribeDepthRequestHelper = (symbol) => {
     const streamnName = `${symbol?.toLowerCase()}@${WSS.STREAMS.DEPTH}@${WSS.MS}`;
-    console.log('unsub');
     return JSON.stringify({
         method: "UNSUBSCRIBE",
         params: [streamnName],

@@ -29,7 +29,6 @@ export const SymbolObserver: FC<Props> = ({ symbol }) => {
             if (a && b) {
                 dispatch(addDepthAction(a, b)); // add
             }
-            console.log(JSON.parse(message.data));
         };
 
         ws.onerror = (error) => {};

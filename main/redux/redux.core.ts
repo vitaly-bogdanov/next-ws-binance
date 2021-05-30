@@ -21,10 +21,7 @@ export const initializeStore = (preloadedState?: any) => {
       // ...preloadedState,
       ...store.getState()
     });
-    console.log('!!!!!!!!!!!');
-    console.log(_store.getState());
-    console.log('!!!!!!!!!!!');
-    store = undefined
+    store = undefined;
   }
   if (typeof window === 'undefined') return _store
   if (!store) store = _store
