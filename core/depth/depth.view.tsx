@@ -77,7 +77,7 @@ const Container = styled.div`
     grid-gap: 10px;
     grid-template-columns: 1fr 1fr;
     padding: 10px;
-    max-height: 1000px;
+    max-height: 80vh;
     @media (max-width: ${RESPONSIVE.LAPTOP.WIDTH}) {
         padding: ${RESPONSIVE.LAPTOP.TABLE_GRID.CONTAINER_PADDING};
         grid-gap: ${RESPONSIVE.LAPTOP.TABLE_GRID.TAPBLE_GAP};
