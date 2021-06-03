@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { LayoutContent } from '../../lib/layouts';
 import { TPriceAndQuantity } from '../../main/binance';
 import { getTotal } from '../../main/binance';
-import { fixDigitsNumberAfterDecimalPoint } from './depth.helpers';
 import { RESPONSIVE } from './depth.theme';
+import { fixDigitsNumberAfterDecimalPointHelper } from './depth.helpers';
 
 interface IProps {
     bids: TPriceAndQuantity[]
@@ -35,7 +35,10 @@ const Cell = styled.div`
         padding: ${RESPONSIVE.LAPTOP.TABLE_GRID.CELL_PADDING};
     }
     @media (max-width: ${RESPONSIVE.TABLET.WIDTH}) {
-        padding: ${RESPONSIVE.TABLET.TABLE_GRID.CELL_PADDING}
+        padding: ${RESPONSIVE.TABLET.TABLE_GRID.CELL_PADDING};
+        &:last-child {
+            display: none;
+        }
     }
     @media (max-width: ${RESPONSIVE.MOBILE.WIDTH}) {
         padding: ${RESPONSIVE.MOBILE.TABLE_GRID.CELL_PADDING};
@@ -52,6 +55,9 @@ const TitleCell = styled(Cell)`
     @media (max-width: ${RESPONSIVE.TABLET.WIDTH}) {
         font-size: ${RESPONSIVE.TABLET.TABLE_GRID.TITLE_CELL_FONT_SIZE};
     }
+    @media (max-width: ${RESPONSIVE.MOBILE.WIDTH}) {
+        font-size: ${RESPONSIVE.MOBILE.TABLE_GRID.TITLE_CELL_FONT_SIZE};
+    }
 `;
 
 const ValueCell = styled(Cell)`
@@ -65,10 +71,11 @@ const ValueCell = styled(Cell)`
     }
     @media (max-width: ${RESPONSIVE.TABLET.WIDTH}) {
         font-size: ${RESPONSIVE.TABLET.TABLE_GRID.VALUE_CELL_FONT_SIZE};
+        border-radius: ${RESPONSIVE.TABLET.TABLE_GRID.CELL_BORDER_RADIUS};
+        border: none
     }
     @media (max-width: ${RESPONSIVE.MOBILE.WIDTH}) {
         font-size: ${RESPONSIVE.MOBILE.TABLE_GRID.VALUE_CELL_FONT_SIZE};
-        border-radius: ${RESPONSIVE.MOBILE.TABLE_GRID.CELL_BORDER_RADIUS};
     }
 `;
 
@@ -83,7 +90,7 @@ const Container = styled.div`
         grid-gap: ${RESPONSIVE.LAPTOP.TABLE_GRID.TAPBLE_GAP};
     }
     @media (max-width: ${RESPONSIVE.TABLET.WIDTH}) {
-        grid-template-columns: ${RESPONSIVE.TABLET.TABLE_GRID.TABLE_GRID_TEMPLATE_COLUMNS};
+        grid-gap: ${RESPONSIVE.TABLET.TABLE_GRID.TAPBLE_GAP};
     }
 `;
 
@@ -97,6 +104,9 @@ const ContainerHead = styled(Container)`
     @media (max-width: ${RESPONSIVE.LAPTOP.WIDTH}) {
         padding-right: ${RESPONSIVE.LAPTOP.TABLE_GRID.CONTAINER_HEAD_PADDING_RIGHT};
     }
+    @media (max-width: ${RESPONSIVE.TABLET.WIDTH}) {
+        padding-right: ${RESPONSIVE.TABLET.TABLE_GRID.CONTAINER_HEAD_PADDING_RIGHT};
+    }
 `;
 
 const Table = styled.div`
@@ -104,14 +114,18 @@ const Table = styled.div`
     grid-gap: 10px;
     grid-template-columns: 1fr 1fr 1fr;
     max-height: 1000px;
+    &:first-child {
+        color: green;
+    }
+    &:last-child {
+        color: red;
+    }
     @media (max-width: ${RESPONSIVE.LAPTOP.WIDTH}) {
         grid-gap: ${RESPONSIVE.LAPTOP.TABLE_GRID.TAPBLE_GAP};
     }
     @media (max-width: ${RESPONSIVE.TABLET.WIDTH}) {
         grid-gap: ${RESPONSIVE.TABLET.TABLE_GRID.TAPBLE_GAP};
-        &:last-child {
-            display: ${RESPONSIVE.TABLET.TABLE_GRID.TABLE_DISPLAY_SECOND_PART};
-        }
+        grid-template-columns: ${RESPONSIVE.TABLET.TABLE_GRID.TABLE_GRID_TEMPLATE_COLUMNS};
     }
 `;
 
@@ -124,14 +138,15 @@ const TableHead: FC = () => (
 );
 
 const MemoTableLine: FC<{value: TPriceAndQuantity}> = ({ value }) => {
-    const bid = Number(value[0]);
-    const ask = Number(value[1]);
-    const memoTotal = useMemo(() => getTotal(bid, ask), value);
+    const price = Number(value[0]);
+    const amount = Number(value[1]);
+    const memoTotal = useMemo(() => getTotal(amount, price), value);
+
     return (
         <>
-            <ValueCell>{ fixDigitsNumberAfterDecimalPoint(bid) }</ValueCell>
-            <ValueCell>{ fixDigitsNumberAfterDecimalPoint(ask) }</ValueCell>
-            <ValueCell>{ fixDigitsNumberAfterDecimalPoint(memoTotal) }</ValueCell>
+            <ValueCell>{ fixDigitsNumberAfterDecimalPointHelper(amount) }</ValueCell>
+            <ValueCell>{ fixDigitsNumberAfterDecimalPointHelper(price) }</ValueCell>
+            <ValueCell>{ fixDigitsNumberAfterDecimalPointHelper(memoTotal) }</ValueCell>
         </>
     );
 };

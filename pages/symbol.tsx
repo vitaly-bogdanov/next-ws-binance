@@ -3,4 +3,4 @@ import { reduxSsr } from '../main/redux';
 
 export default SymbolPage;
 
-export const getStaticProps = reduxSsr;
+export const getServerSideProps = reduxSsr;

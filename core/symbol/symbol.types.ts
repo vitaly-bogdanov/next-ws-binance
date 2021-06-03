@@ -1,5 +1,8 @@
 export enum SYMBOL_ACTION_TYPES {
     SET_SYMBOL = 'SYMBOL_ACTION_TYPES.SET_SYMBOL',
-    ADD_DEPTHS = 'SYMBOL_ACTION_TYPES.ADD_DEPTHS',
-    RESET_DEPTHS = 'SYMBOL_ACTION_TYPES.RESET_DEPTHS'
+};
+
+export type TSymbolState = {
+    current: string,
+    prev: string
 };

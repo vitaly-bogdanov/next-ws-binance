@@ -7,7 +7,7 @@ import { LayoutClientPage } from '../../lib/layouts';
 
 
 export const SymbolPage: FC = () => {
-    const symbol = useSelector((state: RootState) => state.depthReducer.symbol);
+    const symbol = useSelector((state: RootState) => state.symbolReducer.current);
 
     return (
         <LayoutClientPage title={symbol}>

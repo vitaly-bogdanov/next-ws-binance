@@ -1,42 +1,40 @@
-import { FC, useEffect, useRef } from 'react';
-import {  useDispatch } from 'react-redux';
+import { FC, useEffect } from 'react';
+import {  useDispatch, useSelector } from 'react-redux';
+import { 
+    WssGetConnection, 
+    subscribeDepthRequestHelper, 
+    unsubscribeDepthRequestHelper,
+    binanceSnapshotActionThunk,
+} from '../binance';
+import { resetDepthAction,depthSuccessAction } from '../../core/depth';
+import { RootState } from './redux.types';
 
-import { WssSubscribeDepth, subscribeDepthRequestHelper, unsubscribeDepthRequestHelper } from '../binance';
-import { addDepthAction, resetDepthAction } from '../../core/symbol';
-
-interface Props {
-    symbol: string
-}
-
-export const SymbolObserver: FC<Props> = ({ symbol }) => {
+export const SymbolObserver: FC = () => {
+    const { current, prev } = useSelector((state: RootState) => state.symbolReducer);
     const dispatch = useDispatch();
-    const prevSymbol = useRef(undefined);
-
     useEffect(() => {
-        const ws = WssSubscribeDepth(symbol);
+        const ws = WssGetConnection();
 
         ws.onopen = () => {
-            if (prevSymbol.current) {
-                ws.send(unsubscribeDepthRequestHelper(prevSymbol.current));
+            if (prev) {
+                ws.send(unsubscribeDepthRequestHelper(prev));
                 dispatch(resetDepthAction()); // reset
             }
-            prevSymbol.current = symbol;
-            ws.send(subscribeDepthRequestHelper(symbol));
+            ws.send(subscribeDepthRequestHelper(current));
         };
 
         ws.onmessage = (message) => {
             const { a, b } = JSON.parse(message.data);
-            if (a && b) {
-                dispatch(addDepthAction(a, b)); // add
-            }
+            if (a && b) dispatch(depthSuccessAction(a, b));
         };
 
         ws.onerror = (error) => {};
-        
+
         return () => {
-            ws.send(unsubscribeDepthRequestHelper(prevSymbol.current));
+            ws.send(unsubscribeDepthRequestHelper(current));
         };
-    }, [symbol]);
+
+    }, [current]);
 
     return null;
-}
+};

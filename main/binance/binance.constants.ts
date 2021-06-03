@@ -16,5 +16,6 @@ export const WSS = {
     }
 }
 
-export const SYMBOL_LIST = ['BTCUSDT', 'ETHUSDT'];
+export const DEFAULT_SYMBOL = 'BTCUSDT';
+export const SYMBOL_LIST = [DEFAULT_SYMBOL, 'ETHUSDT'];
 export const DEPTH_LIMIT = 500;

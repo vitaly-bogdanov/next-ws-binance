@@ -7,10 +7,10 @@ import { LayoutClientPage } from '../../lib/layouts';
 import { DepthContainer } from './depth.container';
 
 export const DepthPage: FC = () => {
-    const symbol = useSelector((state: RootState) => state.depthReducer.symbol);
+    const symbol = useSelector((state: RootState) => state.symbolReducer.current);
     return (
         <LayoutClientPage title={symbol}>
-            <SymbolObserver symbol={symbol} />
+            <SymbolObserver />
             <DepthContainer />
         </LayoutClientPage>
     );

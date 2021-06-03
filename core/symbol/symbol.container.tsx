@@ -6,7 +6,7 @@ import { SymbolView } from './symbol.view';
 import { setDepthSymbolAction } from './symbol.actions';
 
 export const SymbolContainer: FC = () => {
-    const currentSymbol = useSelector((state: RootState) => state.depthReducer.symbol);
+    const currentSymbol = useSelector((state: RootState) => state.symbolReducer.current);
     const dispatch = useDispatch();
 
     const selectSymbolHandler = (event: ChangeEvent<{ value: string }>): void => {

@@ -1,7 +1,7 @@
 const SIZE = {
     MOBILE_S: '320px',
     MOBILE_M: '375px',
-    MOBILE_L: '425px',
+    MOBILE_L: '440px',
     TABLET: '768px',
     LAPTOP: '1024px',
     LAPTOP_L: '1440px',
@@ -25,11 +25,13 @@ export const RESPONSIVE = {
         WIDTH: SIZE.TABLET,
         TABLE_GRID: {
             TABLE_DISPLAY_SECOND_PART: 'none',
-            TABLE_GRID_TEMPLATE_COLUMNS: '1fr',
+            TABLE_GRID_TEMPLATE_COLUMNS: '1fr 1fr',
             CELL_PADDING: '4px',
             VALUE_CELL_FONT_SIZE: '16px',
             TITLE_CELL_FONT_SIZE: '25px',
-            TAPBLE_GAP: '2px'
+            TAPBLE_GAP: '1px',
+            CELL_BORDER_RADIUS: '2px',
+            CONTAINER_HEAD_PADDING_RIGHT: '0px'
         }
     },
     MOBILE: {
@@ -38,7 +40,7 @@ export const RESPONSIVE = {
             CELL_PADDING: '2px',
             VALUE_CELL_FONT_SIZE: '12px',
             TAPBLE_GAP: '2px',
-            CELL_BORDER_RADIUS: '2px'
+            TITLE_CELL_FONT_SIZE: '14px',
         }
     }
 };

@@ -8,6 +8,6 @@ export const HttpGetDepthBySymbol = async (symbol) => {
     return await response.json();
 }
 
-export const WssSubscribeDepth = (s) => {
+export const WssGetConnection = () => {
     return new WebSocket(WSS.BASE_ENDPOINT + '/ws');
 }
