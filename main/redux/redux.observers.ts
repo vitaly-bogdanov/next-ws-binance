@@ -3,8 +3,7 @@ import {  useDispatch, useSelector } from 'react-redux';
 import { 
     WssGetConnection, 
     subscribeDepthRequestHelper, 
-    unsubscribeDepthRequestHelper,
-    binanceSnapshotActionThunk,
+    unsubscribeDepthRequestHelper
 } from '../binance';
 import { resetDepthAction,depthSuccessAction } from '../../core/depth';
 import { RootState } from './redux.types';

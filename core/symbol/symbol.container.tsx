@@ -10,6 +10,7 @@ export const SymbolContainer: FC = () => {
     const dispatch = useDispatch();
 
     const selectSymbolHandler = (event: ChangeEvent<{ value: string }>): void => {
+        console.log(currentSymbol);
         dispatch(setDepthSymbolAction(event.target.value));
     };
 

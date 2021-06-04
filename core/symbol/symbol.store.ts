@@ -12,7 +12,7 @@ const reducer = (state: TSymbolState = initialState, action): TSymbolState => {
     switch (action.type) {
         case SYMBOL_ACTION_TYPES.SET_SYMBOL:
             return {
-                current: action.payload.sybmbol,
+                current: action.payload.symbol,
                 prev: state.current
             };
         default:

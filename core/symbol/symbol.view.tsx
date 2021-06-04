@@ -11,16 +11,16 @@ interface Props {
     selectSymbolHandler(event: ChangeEvent<{ value: string }>): void
 }
 
-export const SymbolView: FC<Props> = ({ currentSymbol, selectSymbolHandler }) => {
-    (currentSymbol);
+export const SymbolView: FC<Props> = (props) => {
+    console.log(props);
     return (
         <LayoutContent>
             <LayoutDropDown>
                 <LayoutText>
                     <Text>Выберете символ</Text>
                 </LayoutText>
-                <Select value={currentSymbol} onChange={selectSymbolHandler}>
-                    { SYMBOL_LIST.map(((symbol, index) => <MenuItem key={`${symbol}-${index}`} value={symbol}>{symbol}</MenuItem>)) }
+                <Select value={props.currentSymbol} onChange={props.selectSymbolHandler}>
+                    { SYMBOL_LIST.map((symbol, index) => <MenuItem key={`${symbol}-${index}`} value={symbol}>{symbol}</MenuItem>) }
                 </Select>
             </LayoutDropDown>
         </LayoutContent>
